@@ -35,18 +35,19 @@ public class Producer extends Thread {
             
             
              synchronized (queue) {
-            	while(queue.size()>=stockLimit) {
+            	if(queue.size()>=stockLimit) {
             		 try {
 						queue.wait();
 					} catch (InterruptedException e) {
 						e.printStackTrace();
 					}
-            	 }
+            	 }else {
             	 
             	 dataSeed = dataSeed + rand.nextInt(100);
                  System.out.println("Producer added " + dataSeed);
                  queue.add(dataSeed);
                  queue.notify();
+                 }
              }
             
             try {
