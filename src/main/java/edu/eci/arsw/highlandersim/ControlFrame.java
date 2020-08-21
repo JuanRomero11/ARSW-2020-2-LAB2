@@ -35,6 +35,7 @@ public class ControlFrame extends JFrame {
     private JLabel statisticsLabel;
     private JScrollPane scrollPane;
     private JTextField numOfImmortals;
+    public static boolean stop = false;
 
     /**
      * Launch the application.
@@ -84,24 +85,27 @@ public class ControlFrame extends JFrame {
         });
         toolBar.add(btnStart);
 
-        JButton btnPauseAndCheck = new JButton("Pause and check");
-        btnPauseAndCheck.addActionListener(new ActionListener() {
-            public void actionPerformed(ActionEvent e) {
+		JButton btnPauseAndCheck = new JButton("Pause and check");
+		btnPauseAndCheck.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-                /*
+				/*
 				 * COMPLETAR
-                 */
-                int sum = 0;
-                for (Immortal im : immortals) {
-                    sum += im.getHealth();
-                }
+				 */
+				if (immortals.size() > 0) {
+					immortals.get(0).setPause(true);
 
-                statisticsLabel.setText("<html>"+immortals.toString()+"<br>Health sum:"+ sum);
-                
-                
+					int sum = 0;
+					for (Immortal im : immortals) {
 
-            }
-        });
+						sum += im.getHealth();
+					}
+
+					statisticsLabel.setText("<html>" + immortals.toString() + "<br>Health sum:" + sum);
+				}
+
+			}
+		});
         toolBar.add(btnPauseAndCheck);
 
         JButton btnResume = new JButton("Resume");
@@ -111,7 +115,11 @@ public class ControlFrame extends JFrame {
                 /**
                  * IMPLEMENTAR
                  */
-
+            	for (Immortal im : immortals) {
+            	im.setRenaudar(true);
+            	
+            	}
+            	
             }
         });
 
@@ -126,6 +134,16 @@ public class ControlFrame extends JFrame {
         numOfImmortals.setColumns(10);
 
         JButton btnStop = new JButton("STOP");
+        
+		btnStop.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				stop = true;
+				btnPauseAndCheck.setEnabled(false);
+				btnResume.setEnabled(false);
+				statisticsLabel.setText("<html>"+"Finished");
+			}
+		});
+ 
         btnStop.setForeground(Color.RED);
         toolBar.add(btnStop);
 
