@@ -36,6 +36,7 @@ public class ControlFrame extends JFrame {
     private JScrollPane scrollPane;
     private JTextField numOfImmortals;
     public static boolean stop = false;
+    private static boolean pausar=true;
 
     /**
      * Launch the application.
@@ -44,7 +45,7 @@ public class ControlFrame extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    ControlFrame frame = new ControlFrame();
+                	ControlFrame frame = new ControlFrame();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -94,6 +95,7 @@ public class ControlFrame extends JFrame {
 				 */
 				if (immortals.size() > 0) {
 					immortals.get(0).setPause(true);
+					System.out.println(immortals.get(0).getState());
 
 					int sum = 0;
 					for (Immortal im : immortals) {
@@ -102,6 +104,7 @@ public class ControlFrame extends JFrame {
 					}
 
 					statisticsLabel.setText("<html>" + immortals.toString() + "<br>Health sum:" + sum);
+					pausar=true;
 				}
 
 			}
@@ -180,8 +183,11 @@ public class ControlFrame extends JFrame {
         }
 
     }
+    
+ 
 
 }
+
 
 class TextAreaUpdateReportCallback implements ImmortalUpdateReportCallback{
 

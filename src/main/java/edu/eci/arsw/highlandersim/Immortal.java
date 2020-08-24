@@ -41,8 +41,9 @@ public class Immortal extends Thread {
         	if(this.pause) {
         		try {
 					this.wait();
+					
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
+				
 					e.printStackTrace();
 				}
         	}
@@ -90,9 +91,11 @@ public class Immortal extends Thread {
 			        if (i2.getHealth() > 0) {
 			            i2.changeHealth(i2.getHealth() - defaultDamageValue);
 			            this.health += defaultDamageValue;
-			            updateCallback.processReport("Fight: " + this + " vs " + i2+"\n");
+			            if (updateCallback!=null) { // el condicional es para pder hacer las pruebas sin inbolucrar componentes frame
+			            updateCallback.processReport("Fight: " + this + " vs " + i2+"\n");}
 			        } else {
-			            updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");
+			        	if (updateCallback!=null) { // el condicional es para pder hacer las pruebas sin inbolucrar componentes frame
+			            updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");}
 			        }
 	    		}
 	    	}
@@ -104,9 +107,11 @@ public class Immortal extends Thread {
 			        if (i2.getHealth() > 0) {
 			            i2.changeHealth(i2.getHealth() - defaultDamageValue);
 			            this.health += defaultDamageValue;
-			            updateCallback.processReport("Fight: " + this + " vs " + i2+"\n");
+			            if (updateCallback!=null) { // el condicional es para pder hacer las pruebas sin inbolucrar componentes frame
+			            updateCallback.processReport("Fight: " + this + " vs " + i2+"\n");}
 			        } else {
-			            updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");
+			        	if (updateCallback!=null) { // el condicional es para pder hacer las pruebas sin inbolucrar componentes frame
+			            updateCallback.processReport(this + " says:" + i2 + " is already dead!\n");}
 			        }
 	    		}
 	    	}
